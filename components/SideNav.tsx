@@ -1,8 +1,13 @@
+import { auth } from "@/auth";
 import Logo from "./Logo";
 import NavLink from "./NavLink";
 import MoreDropdown from "./MoreDropdown";
+import ProfileLink from "./ProfileLink";
 
-function SideNav() {
+async function SideNav() {
+    const session = await auth();
+    const user = session?.user;
+
     return (
         <div className="flex flex-col h-full px-3 py-4 md:px-2">
             <div
@@ -13,7 +18,7 @@ function SideNav() {
             >
                 <Logo />
                 <NavLink />
-                {/* {user && <ProfileLink />} */}
+                {user && <ProfileLink user={user} />}
 
                 <div className="hidden md:flex relative md:mt-auto flex-1 items-end w-full">
                     <MoreDropdown />

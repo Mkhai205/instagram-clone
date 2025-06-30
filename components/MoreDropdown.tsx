@@ -25,6 +25,7 @@ import { cn } from "@/lib/utils";
 import { Label } from "./ui/label";
 import { Switch } from "./ui/switch";
 import { useTheme } from "next-themes";
+import { signOut } from "next-auth/react";
 
 function MoreDropdown() {
     const [open, setOpen] = useState(false);
@@ -48,8 +49,6 @@ function MoreDropdown() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [ref]);
-
-    const handleSignOut = () => {};
 
     return (
         <DropdownMenu open={open}>
@@ -116,7 +115,7 @@ function MoreDropdown() {
                         <DropdownMenuSeparator className="bg-neutral-700 my-1" />
                         <DropdownMenuItem
                             className="menuItem"
-                            onClick={handleSignOut}
+                            onClick={() => signOut()}
                         >
                             <span>
                                 <LogOut size={20} />

@@ -28,7 +28,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressContentEditableWarning>
+        <html lang="en" suppressContentEditableWarning={true}>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >

@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getUserId } from "@/lib/utils";
-import { CreatePost, DeletePost, LikeSchema } from "./schemas";
+import { BookmarkSchema, CreatePost, DeletePost, LikeSchema } from "./schemas";
 
 export async function createPost(values: z.infer<typeof CreatePost>) {
     const validateFields = CreatePost.safeParse(values);
@@ -33,7 +33,6 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
 
         revalidatePath("/dashboard");
         redirect("/dashboard");
-        return { statusbar: "200", message: "Post created successfully." };
     } catch (error) {
         console.log("🚀 -> actions.ts:36 -> createPost -> error:", error);
         return { message: "Database Error: Failed to Create Post." };
@@ -68,7 +67,7 @@ export async function deletePost(formData: FormData) {
     }
 }
 
-export async function likePost(value: string) {
+export async function likePost(value: FormDataEntryValue) {
     const validateFields = LikeSchema.safeParse({ postId: value });
 
     if (!validateFields.success) {
@@ -124,5 +123,63 @@ export async function likePost(value: string) {
     } catch (error) {
         console.error("🚀 -> actions.ts:78 -> likePost -> error:", error);
         return { status: "500", message: "Database Error: Failed to like Post." };
+    }
+}
+
+export async function bookmarkPost(value: FormDataEntryValue) {
+    const validateFields = BookmarkSchema.safeParse({ postId: value });
+
+    if (!validateFields.success) {
+        return {
+            errors: validateFields.error.flatten().fieldErrors,
+            message: "Missing Fields. Failed to bookmark Post",
+        };
+    }
+
+    const { postId } = validateFields.data;
+
+    try {
+        const userId = await getUserId();
+
+        const post = await prisma.post.findUnique({
+            where: { id: postId },
+        });
+
+        if (!post) {
+            throw new Error("Post not found.");
+        }
+
+        const existingBookmark = await prisma.savedPost.findUnique({
+            where: {
+                postId_userId: {
+                    postId,
+                    userId,
+                },
+            },
+        });
+
+        if (existingBookmark) {
+            // If the bookmark already exists, remove it
+            await prisma.savedPost.delete({
+                where: {
+                    id: existingBookmark.id,
+                },
+            });
+            revalidatePath("/dashboard");
+            return { status: "200", message: "Post unbookmarked successfully." };
+        } else {
+            // If the bookmark does not exist, create it
+            await prisma.savedPost.create({
+                data: {
+                    postId,
+                    userId,
+                },
+            });
+            revalidatePath("/dashboard");
+            return { status: "200", message: "Post bookmarked successfully." };
+        }
+    } catch (error) {
+        console.error("🚀 -> actions.ts:100 -> bookmarkPost -> error:", error);
+        return { status: "500", message: "Database Error: Failed to bookmark Post." };
     }
 }

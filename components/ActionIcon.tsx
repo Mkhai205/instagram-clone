@@ -6,7 +6,13 @@ type ActionIconProps = Partial<ButtonProps> & {
 
 function ActionIcon({ children, ...buttonProps }: ActionIconProps) {
     return (
-        <Button type="submit" variant="link" size="icon" className="w-9 h-9" {...buttonProps}>
+        <Button
+            type="submit"
+            variant="link"
+            size="icon"
+            className="w-9 h-9 hover:text-neutral-400 dark:hover:text-neutral-500"
+            {...buttonProps}
+        >
             {children}
         </Button>
     );

@@ -3,7 +3,7 @@ import UserAvatar from "@/components/UserAvatar";
 import { PostWithExtras } from "@/lib/definitions";
 import Image from "next/image";
 import Link from "next/link";
-// import Comments from "./Comments";
+import Comments from "./Comments";
 import { Card } from "./ui/card";
 import Timestamp from "./Timestamp";
 import PostOptions from "./PostOptions";
@@ -17,7 +17,7 @@ async function Post({ post }: { post: PostWithExtras }) {
     if (!session?.user) return null;
 
     return (
-        <div className="flex flex-col gap-y-2.5">
+        <div className="flex flex-col gap-y-2">
             <div className="flex items-center justify-between px-3 sm:px-0">
                 <div className="flex gap-x-3 items-center">
                     <UserAvatar user={post.user} className="w-8 h-8" />
@@ -41,13 +41,14 @@ async function Post({ post }: { post: PostWithExtras }) {
             <Card className="relative h-[450px] w-full overflow-hidden rounded-none sm:rounded-md">
                 <Image
                     fill
+                    sizes="500px"
                     src={post.fileUrl}
                     alt="Post image"
                     className="sm:rounded-md object-cover"
                 />
             </Card>
 
-            <PostActions post={post} userId={userId} className="px-3 sm:px-0" />
+            <PostActions post={post} userId={userId} />
 
             {post.caption && (
                 <div className="text-sm leading-none flex items-center gap-x-2 font-medium">
@@ -56,7 +57,7 @@ async function Post({ post }: { post: PostWithExtras }) {
                 </div>
             )}
 
-            {/* <Comments postId={post.id} comments={post.comments} user={session.user} /> */}
+            <Comments postId={post.id} comments={post.comments} user={session.user} />
         </div>
     );
 }

@@ -13,6 +13,7 @@ function UserAvatar({ user, ...avatarProps }: Props) {
             <Image
                 fill
                 sizes="24px"
+                priority={true}
                 className="rounded-full object-cover"
                 alt={`${user?.name}'s profile picture`}
                 src={user?.image || "/images/kakadev_logo.jpg"}

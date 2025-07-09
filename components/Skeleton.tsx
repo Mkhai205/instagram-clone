@@ -51,13 +51,12 @@ export function ViewPostSkeleton() {
     return (
         <Dialog open>
             <DialogContent
-                className="flex gap-0 flex-col md:flex-row items-start p-0 
-                md:max-w-3xl lg:max-w-5xl xl:max-w-6xl h-full max-h-[500px] 
-                lg:max-h-[700px] xl:max-h-[800px]"
+                className="flex gap-0 flex-col md:flex-row items-start p-0 w-3/4 md:max-w-3xl
+                lg:max-w-4xl xl:max-w-5xl h-full max-h-[640px] lg:max-h-[600px] xl:max-h-[720px]"
             >
                 <Skeleton
-                    className="relative overflow-hidden h-96 md:h-[500px] lg:h-[700px] 
-                    xl:h-[800px] max-w-3xl w-full rounded-r-none"
+                    className="relative overflow-hidden h-full md:h-[640px] lg:h-[600px] 
+                    xl:h-[720px] max-w-3xl w-full rounded-r-none"
                 />
 
                 <div className="flex flex-col h-full py-4 pl-3.5 pr-6 flex-1">

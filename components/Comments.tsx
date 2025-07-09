@@ -116,8 +116,8 @@ function Comments({ postId, comments, user }: CommentsProps) {
                             disabled={isSubmitting || isPending}
                             aria-label="Post comment"
                             className="text-sky-500 text-sm font-semibold hover:text-sky-700 
-                    dark:hover:text-white disabled:cursor-not-allowed  dark:disabled:text-slate-500 
-                    disabled:text-sky-500/40 disabled:hover:text-sky-500/40 dark:disabled:hover:text-slate-500"
+                            dark:hover:text-white disabled:cursor-not-allowed  dark:disabled:text-slate-500 
+                            disabled:text-sky-500/40 disabled:hover:text-sky-500/40 dark:disabled:hover:text-slate-500"
                         >
                             Post
                         </button>

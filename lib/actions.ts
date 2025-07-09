@@ -5,7 +5,14 @@ import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getUserId } from "@/lib/utils";
-import { BookmarkSchema, CreateComment, CreatePost, DeletePost, LikeSchema } from "./schemas";
+import {
+    BookmarkSchema,
+    CreateComment,
+    CreatePost,
+    DeleteComment,
+    DeletePost,
+    LikeSchema,
+} from "./schemas";
 
 export async function createPost(values: z.infer<typeof CreatePost>) {
     const validateFields = CreatePost.safeParse(values);
@@ -32,11 +39,12 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
         });
 
         revalidatePath("/dashboard");
-        redirect("/dashboard");
     } catch (error) {
         console.log("🚀 -> actions.ts:36 -> createPost -> error:", error);
         return { message: "Database Error: Failed to Create Post." };
     }
+
+    redirect("/dashboard");
 }
 
 export async function deletePost(formData: FormData) {
@@ -220,5 +228,31 @@ export async function createComment(values: z.infer<typeof CreateComment>) {
     } catch (error) {
         console.error("🚀 -> actions.ts:120 -> createComment -> error:", error);
         return { status: "500", message: "Database Error: Failed to create Comment." };
+    }
+}
+
+export async function deleteComment(formData: FormData) {
+    const { id } = DeleteComment.parse({ id: formData.get("id") });
+
+    try {
+        const userId = await getUserId();
+
+        const comment = await prisma.comment.findUnique({
+            where: { id, userId },
+        });
+
+        if (!comment) {
+            throw new Error("Comment not found or you do not have permission to delete it.");
+        }
+
+        await prisma.comment.delete({
+            where: { id },
+        });
+
+        revalidatePath(`/dashboard`);
+        return { status: "200", message: "Comment deleted successfully." };
+    } catch (error) {
+        console.error("🚀 -> actions.ts:140 -> deleteComment -> error:", error);
+        return { status: "500", message: "Database Error: Failed to delete Comment." };
     }
 }

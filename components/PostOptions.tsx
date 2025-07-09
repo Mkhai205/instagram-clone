@@ -1,7 +1,7 @@
 "use client";
 
 import { PostWithExtras } from "@/lib/definitions";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "./ui/dialog";
 import { MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SubmitButton from "./SubmitButton";
@@ -22,10 +22,13 @@ function PostOptions({ post, userId, className }: PostOptionsProps) {
         <Dialog>
             <DialogTrigger asChild>
                 <MoreHorizontal
-                    className={cn("w-5 h-5 cursor-pointer dark:text-neutral-400", className)}
+                    className={cn(
+                        "w-5 h-5 cursor-pointer dark:text-neutral-200 hover:text-neutral-500 dark:hover:text-neutral-400",
+                        className
+                    )}
                 />
             </DialogTrigger>
-            <DialogContent className="dialogContent">
+            <DialogContent close={false} className="dialogContent">
                 {isMyPost && (
                     <>
                         <form
@@ -56,9 +59,13 @@ function PostOptions({ post, userId, className }: PostOptionsProps) {
                     </>
                 )}
 
-                <form action="" className="postOption border-0">
-                    <button className="w-full p-3">Hide like count</button>
+                <form action="" className="postOption">
+                    <button className="w-full p-3 sm:rounded-lg">Hide like count</button>
                 </form>
+                <Link scroll={false} href={`/dashboard/p/${post.id}`} className="postOption p-3">
+                    Go to post
+                </Link>
+                <DialogClose className="postOption p-3">Cancel</DialogClose>
             </DialogContent>
         </Dialog>
     );

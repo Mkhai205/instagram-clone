@@ -54,17 +54,14 @@ export function ViewPostSkeleton() {
                 className="flex gap-0 flex-col md:flex-row items-start p-0 w-3/4 md:max-w-3xl
                 lg:max-w-4xl xl:max-w-5xl h-full max-h-[640px] md:max-h-[600px] lg:max-h-[660px] xl:max-h-[700px]"
             >
-                <Skeleton
-                    className="relative overflow-hidden h-full md:h-[640px] lg:h-[600px] 
-                    xl:h-[720px] max-w-3xl w-full rounded-r-none"
-                />
+                <Skeleton className="relative overflow-hidden h-full max-w-3xl w-full rounded-none sm:rounded-r-none" />
 
                 <div className="flex flex-col h-full py-4 pl-3.5 pr-6 flex-1">
                     <div className="flex items-center space-x-4">
-                        <Skeleton className="h-12 w-12 rounded-full" />
+                        <Skeleton className="h-10 w-10 rounded-full" />
                         <div className="space-y-2">
-                            <Skeleton className="h-4 w-[250px]" />
-                            <Skeleton className="h-4 w-[200px]" />
+                            <Skeleton className="h-3 w-[250px]" />
+                            <Skeleton className="h-3 w-[200px]" />
                         </div>
                     </div>
 
@@ -72,9 +69,9 @@ export function ViewPostSkeleton() {
 
                     <div className="flex items-center w-full space-x-4">
                         <div className="space-y-2 w-full">
-                            <Skeleton className="h-4 w-full flex-1" />
-                            <Skeleton className="h-4 w-[300px]" />
-                            <Skeleton className="h-4 w-[300px]" />
+                            <Skeleton className="h-3 w-full flex-1" />
+                            <Skeleton className="h-3 w-[280px]" />
+                            <Skeleton className="h-3 w-[280px]" />
                         </div>
                     </div>
                 </div>
@@ -97,7 +94,7 @@ function UserAvatarSkeleton() {
 
 export function SinglePostSkeleton() {
     return (
-        <div className="mx-3 sm:mx-0">
+        <>
             <Card className="h-[540px] md:h-[600px] max-w-3xl lg:max-w-4xl hidden sm:flex mx-auto">
                 <div className="relative overflow-hidden max-w-sm md:max-w-md lg:max-w-lg w-full">
                     <Skeleton className="h-full w-full rounded-r-none" />
@@ -120,9 +117,9 @@ export function SinglePostSkeleton() {
                     </div>
                 </div>
             </Card>
-            <div className="sm:hidden">
+            <div className="max-w-md mx-auto sm:hidden">
                 <PostSkeleton />
             </div>
-        </div>
+        </>
     );
 }

@@ -18,7 +18,7 @@ async function Post({ post }: { post: PostWithExtras }) {
 
     return (
         <div className="flex flex-col gap-y-2">
-            <div className="flex items-center justify-between px-3 sm:px-0">
+            <div className="flex items-center justify-between px-1">
                 <div className="flex gap-x-3 items-center">
                     <UserAvatar user={post.user} className="w-8 h-8" />
 

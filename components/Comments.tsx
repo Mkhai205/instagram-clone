@@ -51,7 +51,7 @@ function Comments({ postId, comments, user }: CommentsProps) {
     const isSubmitting = form.formState.isSubmitting;
 
     return (
-        <div className="relative space-y-0.5">
+        <div className="relative space-y-0.5 ml-0.5">
             {commentsCount > 1 && (
                 <Link
                     scroll={false}
@@ -66,7 +66,7 @@ function Comments({ postId, comments, user }: CommentsProps) {
                 const username = comment.user?.username || "Unknown User";
 
                 return (
-                    <div key={index} className="text-sm flex items-center space-x-2">
+                    <div key={index} className="text-sm flex space-x-2">
                         <Link href={`/dashboard/${username}`} className="font-semibold">
                             {username}
                         </Link>

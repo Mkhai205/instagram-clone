@@ -18,16 +18,18 @@ function Comment({ comment, inputRef }: Props) {
     const href = `/dashboard/${username}`;
 
     return (
-        <div className="group p-3 px-3.5  flex items-start space-x-2.5">
-            <Link href={href}>
+        <div className="group p-3 px-3.5 flex items-start space-x-2.5 w-full overflow-hidden">
+            <Link href={href} className="shrink-0">
                 <UserAvatar user={comment.user} className="w-8 h-8" />
             </Link>
-            <div className="space-y-1.5">
-                <div className="flex items-center space-x-1.5 leading-none text-sm">
-                    <Link href={href} className="font-semibold">
+            <div className="space-y-1 flex-1 min-w-0">
+                <div className="flex items-start text-sm w-full flex-wrap gap-1">
+                    <Link href={href} className="font-semibold shrink-0">
                         {username}
                     </Link>
-                    <p className="text-gray-900 dark:text-gray-200">{comment.body}</p>
+                    <p className="text-gray-900 dark:text-gray-200 break-words overflow-wrap-anywhere">
+                        {comment.body}
+                    </p>
                 </div>
                 <div className="flex h-5 items-center space-x-2.5">
                     <Timestamp createdAt={comment.createdAt} />

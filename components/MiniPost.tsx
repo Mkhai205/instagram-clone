@@ -1,9 +1,10 @@
+"use client";
+
 import { PostWithExtras } from "@/lib/definitions";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import UserAvatar from "./UserAvatar";
 import Timestamp from "./Timestamp";
-import PostOptions from "./PostOptions";
 
 function MiniPost({ post }: { post: PostWithExtras }) {
     const username = post.user.username;
@@ -28,11 +29,6 @@ function MiniPost({ post }: { post: PostWithExtras }) {
                 </div>
                 <div className="h-5 text-neutral-500 text-sm space-x-1.5">
                     <Timestamp createdAt={post.createdAt} />
-                    <PostOptions
-                        post={post}
-                        userId={user.id}
-                        className="hidden group-hover:inline"
-                    />
                 </div>
             </div>
         </div>

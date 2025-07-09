@@ -17,11 +17,10 @@ import { Input } from "@/components/ui/input";
 import useMount from "@/hooks/useMount";
 import { createPost } from "@/lib/actions";
 import { CreatePost } from "@/lib/schemas";
-import { UploadButton, UploadDropzone } from "@/lib/uploadthing";
+import { UploadDropzone } from "@/lib/uploadthing";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -63,8 +62,8 @@ function CreatePage() {
                         >
                             {!!fileUrl ? (
                                 <>
-                                    <div className="h-96 md:h-[450px] overflow-hidden rounded-md">
-                                        <AspectRatio ratio={1 / 1} className="relative h-full">
+                                    <div className="h-96 md:h-[500px] overflow-hidden rounded-md">
+                                        <AspectRatio ratio={4 / 6} className="relative h-full">
                                             <Image
                                                 fill
                                                 sizes="(max-width: 768px) 100vw, 50vw"

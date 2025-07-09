@@ -38,7 +38,7 @@ async function Post({ post }: { post: PostWithExtras }) {
 
                 <PostOptions post={post} userId={userId} />
             </div>
-            <Card className="relative h-[450px] w-full overflow-hidden rounded-none sm:rounded-md">
+            <Card className="relative h-[560px] w-full overflow-hidden rounded-none sm:rounded-md">
                 <Image
                     fill
                     sizes="500px"
@@ -51,7 +51,7 @@ async function Post({ post }: { post: PostWithExtras }) {
             <PostActions post={post} userId={userId} />
 
             {post.caption && (
-                <div className="text-sm leading-none flex items-center gap-x-2 font-medium">
+                <div className="text-sm leading-none flex items-center gap-x-2 font-medium ml-0.5">
                     <Link href={`/dashboard/${username}`}>{username}</Link>
                     <p>{post.caption}</p>
                 </div>

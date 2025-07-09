@@ -44,7 +44,7 @@ function LikeButton({ post, userId }: { post: PostWithExtras; userId?: string })
     };
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
             <form action={handleActionLike}>
                 <input type="hidden" name="postId" value={post.id} />
 

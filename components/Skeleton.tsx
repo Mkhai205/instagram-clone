@@ -14,7 +14,7 @@ export function PostSkeleton() {
                 </div>
             </div>
 
-            <Skeleton className="h-[450px]" />
+            <Skeleton className="h-[540px]" />
         </div>
     );
 }
@@ -52,7 +52,7 @@ export function ViewPostSkeleton() {
         <Dialog open>
             <DialogContent
                 className="flex gap-0 flex-col md:flex-row items-start p-0 w-3/4 md:max-w-3xl
-                lg:max-w-4xl xl:max-w-5xl h-full max-h-[640px] lg:max-h-[600px] xl:max-h-[720px]"
+                lg:max-w-4xl xl:max-w-5xl h-full max-h-[640px] md:max-h-[600px] lg:max-h-[660px] xl:max-h-[700px]"
             >
                 <Skeleton
                     className="relative overflow-hidden h-full md:h-[640px] lg:h-[600px] 
@@ -97,27 +97,32 @@ function UserAvatarSkeleton() {
 
 export function SinglePostSkeleton() {
     return (
-        <Card className="max-w-3xl lg:max-w-4xl mx-auto hidden md:flex">
-            <div className="relative overflow-hidden h-[450px] max-w-sm lg:max-w-lg  w-full">
-                <Skeleton className="h-full w-full" />
-            </div>
+        <div className="mx-3 sm:mx-0">
+            <Card className="h-[540px] md:h-[600px] max-w-3xl lg:max-w-4xl hidden sm:flex mx-auto">
+                <div className="relative overflow-hidden max-w-sm md:max-w-md lg:max-w-lg w-full">
+                    <Skeleton className="h-full w-full rounded-r-none" />
+                </div>
 
-            <div className="flex max-w-sm flex-col flex-1">
-                <div className="flex items-center justify-between border-b px-5 py-3">
-                    <div className="flex items-center space-x-2">
-                        <Skeleton className="h-12 w-12 rounded-full" />
-                        <div className="space-y-2">
-                            <Skeleton className="h-4 w-[250px]" />
+                <div className="flex max-w-md flex-col flex-1">
+                    <div className="flex items-center justify-between border-b px-5 py-3">
+                        <div className="flex items-center space-x-2">
+                            <Skeleton className="h-10 w-10 rounded-full" />
+                            <div className="space-y-2">
+                                <Skeleton className="h-4 w-[250px]" />
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="px-5 space-y-3 mt-8">
-                    {Array.from({ length: 3 }).map((_, index) => (
-                        <UserAvatarSkeleton key={index} />
-                    ))}
+                    <div className="px-5 space-y-3 mt-8">
+                        {Array.from({ length: 3 }).map((_, index) => (
+                            <UserAvatarSkeleton key={index} />
+                        ))}
+                    </div>
                 </div>
+            </Card>
+            <div className="sm:hidden">
+                <PostSkeleton />
             </div>
-        </Card>
+        </div>
     );
 }

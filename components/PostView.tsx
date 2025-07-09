@@ -43,12 +43,12 @@ function PostView({ id, post }: PostViewProps) {
             <DialogContent
                 aria-describedby={undefined}
                 className="flex gap-0 flex-col md:flex-row items-start p-0 w-3/4 md:max-w-3xl
-                lg:max-w-4xl xl:max-w-5xl h-full max-h-[640px] lg:max-h-[600px] xl:max-h-[720px]"
+                lg:max-w-4xl xl:max-w-5xl h-full max-h-[640px] md:max-h-[600px] lg:max-h-[660px] xl:max-h-[700px]"
             >
                 <VisuallyHidden>
                     <DialogTitle>Post by {username}</DialogTitle>
                 </VisuallyHidden>
-                <div className="flex flex-col justify-between md:h-full md:order-2 w-full max-w-md">
+                <div className="flex flex-col justify-between md:h-full md:order-2 w-full md:max-w-72 lg:max-w-sm">
                     <DialogHeader
                         className="flex flex-row border-b space-y-0 space-x-2.5 items-center 
                         justify-between py-4 pl-3.5 pr-6"
@@ -91,7 +91,7 @@ function PostView({ id, post }: PostViewProps) {
                     />
                 </div>
 
-                <div className="relative overflow-hidden h-full md:h-[640px] lg:h-[600px] xl:h-[720px] max-w-3xl w-full">
+                <div className="relative overflow-hidden h-full max-w-3xl w-full">
                     <Image
                         fill
                         sizes="640px"

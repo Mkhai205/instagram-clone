@@ -18,16 +18,11 @@ import Image from "next/image";
 import PostOptions from "./PostOptions";
 import { VisuallyHidden } from "./ui/visually-hidden";
 
-type PostViewProps = {
-    id: string;
-    post: PostWithExtras;
-};
-
-function PostView({ id, post }: PostViewProps) {
+function PostView({ post }: { post: PostWithExtras }) {
     const router = useRouter();
 
     const pathname = usePathname();
-    const isPostModal = pathname === `/dashboard/p/${id}`;
+    const isPostModal = pathname === `/dashboard/p/${post.id}`;
 
     const { data: session } = useSession();
     const user = session?.user;
@@ -86,7 +81,7 @@ function PostView({ id, post }: PostViewProps) {
                         </time>
                     </div>
                     <CommentForm
-                        postId={id}
+                        postId={post.id}
                         className="hidden md:inline-flex"
                         inputRef={inputRef}
                     />
@@ -103,7 +98,7 @@ function PostView({ id, post }: PostViewProps) {
                 </div>
 
                 <PostActions post={post} userId={user?.id} className="md:hidden border-b p-2.5" />
-                <CommentForm postId={id} className="md:hidden" inputRef={inputRef} />
+                <CommentForm postId={post.id} className="md:hidden" inputRef={inputRef} />
                 <ViewPost className="md:hidden" />
             </DialogContent>
         </Dialog>

@@ -32,16 +32,19 @@ export function PostsSkeleton() {
 export function EditPostSkeleton() {
     return (
         <Dialog open>
-            <DialogContent>
+            <DialogContent className="w-[472px] max-w-full rounded-t-md">
                 <DialogHeader>
-                    <DialogTitle>Edit info</DialogTitle>
+                    <DialogTitle>Edit Post</DialogTitle>
                 </DialogHeader>
 
-                <AspectRatio ratio={1 / 1} className="relative h-full">
-                    <Skeleton className="h-full w-full" />
-                </AspectRatio>
+                <div className="h-[450px] md:h-[480px] overflow-hidden rounded-md">
+                    <AspectRatio ratio={8 / 10} className="relative h-full">
+                        <Skeleton className="h-full w-full" />
+                    </AspectRatio>
+                </div>
 
                 <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-8 w-16" />
             </DialogContent>
         </Dialog>
     );

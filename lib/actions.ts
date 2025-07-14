@@ -12,13 +12,17 @@ import {
     DeleteComment,
     DeletePost,
     LikeSchema,
+    UpdatePost,
 } from "./schemas";
 
 export async function createPost(values: z.infer<typeof CreatePost>) {
     const validateFields = CreatePost.safeParse(values);
 
     if (!validateFields.success) {
-        return { errors: validateFields.error.flatten().fieldErrors, message: "Validation failed" };
+        return {
+            errors: validateFields.error.flatten().fieldErrors,
+            message: "Miss Fields. Failed to Create Post",
+        };
     }
 
     const { caption, fileUrl } = validateFields.data;
@@ -37,14 +41,48 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
                 },
             },
         });
-
-        revalidatePath("/dashboard");
     } catch (error) {
         console.log("🚀 -> actions.ts:36 -> createPost -> error:", error);
         return { message: "Database Error: Failed to Create Post." };
     }
 
+    revalidatePath("/dashboard");
     redirect("/dashboard");
+}
+
+export async function updatePost(values: z.infer<typeof UpdatePost>) {
+    const validateFields = UpdatePost.safeParse(values);
+
+    if (!validateFields.success) {
+        return {
+            errors: validateFields.error.flatten().fieldErrors,
+            message: "Missing Fields. Failed to Update Post",
+        };
+    }
+
+    const { id, caption, fileUrl } = validateFields.data;
+
+    try {
+        const userId = await getUserId();
+
+        const post = await prisma.post.findUnique({
+            where: { id, userId },
+        });
+
+        if (!post) {
+            throw new Error("Post not found or you do not have permission to update it.");
+        }
+
+        await prisma.post.update({
+            where: { id },
+            data: { caption, fileUrl },
+        });
+    } catch (error) {
+        console.error("🚀 -> actions.ts:58 -> updatePost -> error:", error);
+        return { status: "500", message: "Database Error: Failed to Update Post." };
+    }
+    revalidatePath(`/dashboard`);
+    redirect(`/dashboard`);
 }
 
 export async function deletePost(formData: FormData) {

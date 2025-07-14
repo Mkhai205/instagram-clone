@@ -43,94 +43,93 @@ function CreatePage() {
     if (!mount) return null;
 
     return (
-        <div>
-            <Dialog open={isCreatePage} onOpenChange={(open) => !open && router.back()}>
-                <DialogContent aria-describedby={undefined}>
-                    <DialogHeader>
-                        <DialogTitle>Create new post</DialogTitle>
-                    </DialogHeader>
+        <Dialog open={isCreatePage} onOpenChange={(open) => !open && router.back()}>
+            <DialogContent
+                className="w-[472px] max-w-full rounded-t-md"
+                aria-describedby="create-post-dialog"
+            >
+                <DialogHeader>
+                    <DialogTitle>Create new post</DialogTitle>
+                </DialogHeader>
 
-                    <Form {...form}>
-                        <form
-                            onSubmit={form.handleSubmit(async (values) => {
-                                const response = await createPost(values);
-                                if (response) {
-                                    return toast.error(<Error response={response} />);
-                                }
-                            })}
-                            className="space-y-4"
-                        >
-                            {!!fileUrl ? (
-                                <>
-                                    <div className="h-96 md:h-[500px] overflow-hidden rounded-md">
-                                        <AspectRatio ratio={4 / 6} className="relative h-full">
-                                            <Image
-                                                fill
-                                                sizes="(max-width: 768px) 100vw, 50vw"
-                                                src={fileUrl}
-                                                alt="Post preview"
-                                                className="rounded-md object-cover"
-                                            />
-                                        </AspectRatio>
-                                    </div>
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(async (values) => {
+                            const response = await createPost(values);
+                            if (response) {
+                                return toast.error(<Error response={response} />);
+                            } else {
+                                toast.success("Post created successfully!");
+                            }
+                        })}
+                        className="space-y-4"
+                    >
+                        {!!fileUrl ? (
+                            <>
+                                <div className="h-[450px] md:h-[480px] overflow-hidden rounded-md">
+                                    <AspectRatio ratio={8 / 10} className="relative h-full">
+                                        <Image
+                                            fill
+                                            sizes="500px"
+                                            src={fileUrl}
+                                            alt="Post preview"
+                                            className="rounded-md object-cover"
+                                        />
+                                    </AspectRatio>
+                                </div>
 
-                                    <FormField
-                                        control={form.control}
-                                        name="caption"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel htmlFor="caption">Caption</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        type="caption"
-                                                        id="caption"
-                                                        placeholder="Write a caption..."
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
-                                        )}
-                                    />
-                                </>
-                            ) : (
                                 <FormField
                                     control={form.control}
-                                    name="fileUrl"
-                                    render={({ field, fieldState }) => (
+                                    name="caption"
+                                    render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel htmlFor="picture">Picture</FormLabel>
+                                            <FormLabel htmlFor="caption">Caption</FormLabel>
                                             <FormControl>
-                                                <UploadDropzone
-                                                    endpoint="fileUploader"
-                                                    onClientUploadComplete={(res) => {
-                                                        form.setValue("fileUrl", res[0].ufsUrl);
-                                                        toast.success(
-                                                            "Image uploaded successfully!"
-                                                        );
-                                                    }}
-                                                    onUploadError={(error: Error) => {
-                                                        console.error(error);
-                                                        toast.error("Image upload failed.");
-                                                    }}
+                                                <Input
+                                                    type="caption"
+                                                    id="caption"
+                                                    placeholder="Write a caption..."
+                                                    {...field}
                                                 />
                                             </FormControl>
-                                            <FormDescription>
-                                                Upload a picture to post
-                                            </FormDescription>
-                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
-                            )}
+                            </>
+                        ) : (
+                            <FormField
+                                control={form.control}
+                                name="fileUrl"
+                                render={() => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="picture">Picture</FormLabel>
+                                        <FormControl>
+                                            <UploadDropzone
+                                                endpoint="fileUploader"
+                                                onClientUploadComplete={(res) => {
+                                                    form.setValue("fileUrl", res[0].ufsUrl);
+                                                    toast.success("Image uploaded successfully!");
+                                                }}
+                                                onUploadError={(error: Error) => {
+                                                    console.error(error);
+                                                    toast.error("Image upload failed.");
+                                                }}
+                                            />
+                                        </FormControl>
+                                        <FormDescription>Upload a picture to post</FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        )}
 
-                            <Button type="submit" disabled={form.formState.isSubmitSuccessful}>
-                                Create Post
-                            </Button>
-                        </form>
-                    </Form>
-                </DialogContent>
-            </Dialog>
-        </div>
+                        <Button type="submit" disabled={form.formState.isSubmitSuccessful}>
+                            Create Post
+                        </Button>
+                    </form>
+                </Form>
+            </DialogContent>
+        </Dialog>
     );
 }
 export default CreatePage;

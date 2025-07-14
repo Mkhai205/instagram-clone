@@ -14,7 +14,7 @@ export function PostSkeleton() {
                 </div>
             </div>
 
-            <Skeleton className="h-[540px]" />
+            <Skeleton className="h-[580px]" />
         </div>
     );
 }
@@ -47,16 +47,20 @@ export function EditPostSkeleton() {
     );
 }
 
-export function ViewPostSkeleton() {
+export async function ViewPostSkeleton() {
     return (
         <Dialog open>
             <DialogContent
                 className="flex gap-0 flex-col md:flex-row items-start p-0 w-3/4 md:max-w-3xl
-                lg:max-w-4xl xl:max-w-5xl h-full max-h-[640px] md:max-h-[600px] lg:max-h-[660px] xl:max-h-[700px]"
+                lg:max-w-4xl xl:max-w-5xl h-full max-h-[640px] md:max-h-[600px] lg:max-h-[660px] 
+                xl:max-h-[700px] rounded-t-md sm:rounded-md"
             >
-                <Skeleton className="relative overflow-hidden h-full max-w-3xl w-full rounded-none sm:rounded-r-none" />
+                <Skeleton
+                    className="relative overflow-hidden h-full max-w-3xl w-full 
+                    rounded-t-md sm:rounded-md"
+                />
 
-                <div className="flex flex-col h-full py-4 pl-3.5 pr-6 flex-1">
+                <div className="flex flex-col h-full py-4 px-3 flex-1">
                     <div className="flex items-center space-x-4">
                         <Skeleton className="h-10 w-10 rounded-full" />
                         <div className="space-y-2">

@@ -8,6 +8,7 @@ import SubmitButton from "./SubmitButton";
 import Link from "next/link";
 import { toast } from "sonner";
 import { deletePost } from "@/lib/actions";
+import { useState } from "react";
 
 type PostOptionsProps = {
     post: PostWithExtras;
@@ -17,9 +18,10 @@ type PostOptionsProps = {
 
 function PostOptions({ post, userId, className }: PostOptionsProps) {
     const isMyPost = userId === post.user.id;
+    const [open, setOpen] = useState(false);
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <MoreHorizontal
                     className={cn(
@@ -40,6 +42,7 @@ function PostOptions({ post, userId, className }: PostOptionsProps) {
                                 } else {
                                     toast.error(message);
                                 }
+                                setOpen(false);
                             }}
                             className="postOption"
                         >
@@ -62,7 +65,7 @@ function PostOptions({ post, userId, className }: PostOptionsProps) {
                 <form action="" className="postOption">
                     <button className="w-full p-3 sm:rounded-lg">Hide like count</button>
                 </form>
-                <Link scroll={false} href={`/dashboard/p/${post.id}`} className="postOption p-3">
+                <Link href={`/dashboard/p/${post.id}`} className="postOption p-3">
                     Go to post
                 </Link>
                 <DialogClose className="postOption p-3">Cancel</DialogClose>

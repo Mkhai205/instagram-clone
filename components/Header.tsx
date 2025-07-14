@@ -7,7 +7,7 @@ function Header() {
         <header
             className="fixed md:hidden bg-white top-0 flex items-center justify-between
             dark:bg-neutral-950 w-full z-50 border-b border-zinc-300 dark:border-zinc-700
-            px-3 py-2 sm:-ml-6"
+            px-3 py-2 sm:-ml-4"
         >
             <Link href="/dashboard">
                 <p className="font-semibold text-xl">Instagram</p>
@@ -27,11 +27,7 @@ function Header() {
                     />
                 </div>
 
-                <Button
-                    size={"icon"}
-                    variant={"ghost"}
-                    className="hover:bg-transparent"
-                >
+                <Button size={"icon"} variant={"ghost"} className="hover:bg-transparent">
                     <Heart className="!w-6 !h-6" />
                 </Button>
             </div>

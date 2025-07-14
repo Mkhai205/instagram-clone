@@ -18,7 +18,7 @@ async function Post({ post }: { post: PostWithExtras }) {
 
     return (
         <div className="flex flex-col gap-y-2">
-            <div className="flex items-center justify-between px-1">
+            <div className="flex items-center justify-between px-2 pb-1">
                 <div className="flex gap-x-3 items-center">
                     <UserAvatar user={post.user} className="w-8 h-8" />
 
@@ -38,13 +38,13 @@ async function Post({ post }: { post: PostWithExtras }) {
 
                 <PostOptions post={post} userId={userId} />
             </div>
-            <Card className="relative h-[560px] w-full overflow-hidden rounded-none sm:rounded-md">
+            <Card className="relative h-[580px] w-full overflow-hidden rounded-sm">
                 <Image
                     fill
                     sizes="500px"
                     src={post.fileUrl}
                     alt="Post image"
-                    className="sm:rounded-md object-cover"
+                    className="rounded-sm object-cover"
                 />
             </Card>
 

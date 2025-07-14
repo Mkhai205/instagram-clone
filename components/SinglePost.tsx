@@ -27,13 +27,13 @@ async function SinglePost({ id }: { id: string }) {
 
     return (
         <div>
-            <Card className="h-[540px] md:h-[600px] max-w-3xl lg:max-w-4xl hidden sm:flex mx-auto">
+            <Card className="h-[540px] md:h-[600px] max-w-3xl lg:max-w-4xl hidden sm:flex sm:mx-auto">
                 <div className="relative overflow-hidden max-w-sm md:max-w-md lg:max-w-lg w-full">
                     <Image
                         src={post.fileUrl}
                         alt="Post preview"
                         fill
-                        className="md:rounded-l-md object-cover"
+                        className="sm:rounded-l-md object-cover"
                     />
                 </div>
 
@@ -94,7 +94,7 @@ async function SinglePost({ id }: { id: string }) {
                     <CommentForm postId={id} className="hidden md:inline-flex" />
                 </div>
             </Card>
-            <div className="max-w-md mx-auto sm:hidden">
+            <div className="w-full max-w-[472px] mx-auto sm:hidden">
                 <Post post={post} />
             </div>
         </div>

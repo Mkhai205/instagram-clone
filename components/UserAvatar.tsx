@@ -12,7 +12,7 @@ function UserAvatar({ user, ...avatarProps }: Props) {
         <Avatar {...avatarProps}>
             <Image
                 fill
-                sizes="24px"
+                sizes="2500x1600"
                 priority={true}
                 className="rounded-full object-cover"
                 alt={`${user?.name}'s profile picture`}

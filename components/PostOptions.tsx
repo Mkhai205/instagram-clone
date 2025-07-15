@@ -9,6 +9,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { deletePost } from "@/lib/actions";
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 type PostOptionsProps = {
     post: PostWithExtras;
@@ -19,6 +20,9 @@ type PostOptionsProps = {
 function PostOptions({ post, userId, className }: PostOptionsProps) {
     const isMyPost = userId === post.user.id;
     const [open, setOpen] = useState(false);
+    const router = useRouter();
+    const pathname = usePathname();
+    const isDashboard = pathname === "/dashboard";
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -43,6 +47,9 @@ function PostOptions({ post, userId, className }: PostOptionsProps) {
                                     toast.error(message);
                                 }
                                 setOpen(false);
+                                if (!isDashboard) {
+                                    router.push("/dashboard");
+                                }
                             }}
                             className="postOption"
                         >
@@ -68,7 +75,7 @@ function PostOptions({ post, userId, className }: PostOptionsProps) {
                 <Link href={`/dashboard/p/${post.id}`} className="postOption p-3">
                     Go to post
                 </Link>
-                <DialogClose className="postOption p-3">Cancel</DialogClose>
+                <DialogClose className="postOption border-0 w-full p-3">Cancel</DialogClose>
             </DialogContent>
         </Dialog>
     );

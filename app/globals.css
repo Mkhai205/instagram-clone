@@ -89,6 +89,6 @@
     }
 
     .dialogContent {
-        @apply bg-white dark:bg-neutral-800 !p-0 overflow-hidden !gap-0;
+        @apply bg-white !max-w-md !rounded-md dark:bg-neutral-800 !p-0 overflow-hidden !gap-0;
     }
 }

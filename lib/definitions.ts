@@ -1,4 +1,4 @@
-import type { Comment, Like, Post, SavedPost, User } from "@prisma/client";
+import type { Comment, Follows, Like, Post, SavedPost, User } from "@prisma/client";
 
 export type CommentWithExtras = Comment & {
     user: User;
@@ -13,4 +13,19 @@ export type PostWithExtras = Post & {
     likes: LikeWithExtras[];
     savedBy: SavedPost[];
     user: User;
+};
+
+export type UserWithFollows = User & {
+    followedBy: Follows[];
+    following: Follows[];
+};
+
+export type FollowerWithExtras = Follows & { follower: UserWithFollows };
+export type FollowingWithExtras = Follows & { following: UserWithFollows };
+
+export type UserWithExtras = User & {
+    posts: Post[];
+    saved: SavedPost[];
+    followedBy: FollowerWithExtras[];
+    following: FollowingWithExtras[];
 };

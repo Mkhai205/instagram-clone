@@ -11,8 +11,10 @@ import {
     CreatePost,
     DeleteComment,
     DeletePost,
+    FollowUser,
     LikeSchema,
     UpdatePost,
+    UpdateUser,
 } from "./schemas";
 
 export async function createPost(values: z.infer<typeof CreatePost>) {
@@ -292,5 +294,104 @@ export async function deleteComment(formData: FormData) {
     } catch (error) {
         console.error("🚀 -> actions.ts:140 -> deleteComment -> error:", error);
         return { status: "500", message: "Database Error: Failed to delete Comment." };
+    }
+}
+
+export async function updateProfile(values: z.infer<typeof UpdateUser>) {
+    const validateFields = UpdateUser.safeParse(values);
+
+    if (!validateFields.success) {
+        return {
+            errors: validateFields.error.flatten().fieldErrors,
+            message: "Missing Fields. Failed to update Profile",
+        };
+    }
+
+    const { name, username, bio, image, website, gender } = validateFields.data;
+
+    try {
+        const userId = await getUserId();
+
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+
+        if (!user) {
+            throw new Error("User not found.");
+        }
+
+        await prisma.user.update({
+            where: { id: userId },
+            data: {
+                name,
+                username,
+                bio,
+                image,
+                website,
+                gender,
+            },
+        });
+
+        revalidatePath(`/dashboard`);
+        return { status: "200", message: "Profile updated successfully." };
+    } catch (error) {
+        console.error("🚀 -> actions.ts:160 -> updateProfile -> error:", error);
+        return { status: "500", message: "Database Error: Failed to update Profile." };
+    }
+}
+
+export async function followUser(formData: FormData) {
+    const { id } = FollowUser.parse({ id: formData.get("id") });
+
+    if (!id) {
+        return { status: "400", message: "Missing profile ID." };
+    }
+
+    try {
+        const userId = await getUserId();
+
+        const user = await prisma.user.findUnique({
+            where: { id },
+        });
+
+        if (!user) {
+            throw new Error("User not found.");
+        }
+
+        const existingFollow = await prisma.follows.findUnique({
+            where: {
+                followerId_followingId: {
+                    followerId: userId,
+                    followingId: id,
+                },
+            },
+        });
+
+        if (existingFollow) {
+            // If already following, unfollow
+            await prisma.follows.delete({
+                where: {
+                    followerId_followingId: {
+                        followerId: userId,
+                        followingId: id,
+                    },
+                },
+            });
+            revalidatePath(`/dashboard`);
+            return { status: "200", message: "Unfollowed successfully." };
+        } else {
+            // If not following, follow
+            await prisma.follows.create({
+                data: {
+                    followerId: userId,
+                    followingId: id,
+                },
+            });
+            revalidatePath(`/dashboard`);
+            return { status: "200", message: "Followed successfully." };
+        }
+    } catch (error) {
+        console.error("🚀 -> actions.ts:190 -> followUser -> error:", error);
+        return { status: "500", message: "Database Error: Failed to follow/unfollow user." };
     }
 }

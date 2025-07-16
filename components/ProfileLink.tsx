@@ -11,7 +11,7 @@ import UserAvatar from "./UserAvatar";
 function ProfileLink({ user }: { user: User }) {
     const pathname = usePathname();
     const href = `/dashboard/${user.username}`;
-    const isActive = pathname === href;
+    const isActive = pathname.startsWith(href);
     return (
         <Link
             href={href}
@@ -23,9 +23,7 @@ function ProfileLink({ user }: { user: User }) {
         >
             <UserAvatar
                 user={user}
-                className={`relative h-7 w-7 ${
-                    isActive && "border-2 border-white"
-                }`}
+                className={`relative h-7 w-7 ${isActive && "border-2 border-white"}`}
             />
 
             <p

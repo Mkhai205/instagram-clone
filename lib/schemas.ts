@@ -36,10 +36,10 @@ export const DeleteComment = CommentSchema.pick({ id: true });
 export const UserSchema = z.object({
     id: z.string(),
     username: z.string().optional(),
-    name: z.string().optional(),
+    name: z.string().max(30).optional(),
     image: z.string().optional(),
     bio: z.string().max(150).optional(),
-    website: z.string().url().optional(),
+    website: z.string().url().optional().or(z.literal("")),
     gender: z.string().optional(),
 });
 

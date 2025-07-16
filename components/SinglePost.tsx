@@ -13,6 +13,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Card } from "./ui/card";
 import MiniPost from "./MiniPost";
+import Timestamp from "./Timestamp";
 
 async function SinglePost({ id }: { id: string }) {
     const post = await fetchPostById(id);
@@ -45,9 +46,21 @@ async function SinglePost({ id }: { id: string }) {
                                     <Link href={href}>
                                         <UserAvatar user={post.user} className="w-8 h-8" />
                                     </Link>
-                                    <Link href={href} className="font-semibold text-sm">
-                                        {postUsername}
-                                    </Link>
+
+                                    <div className="text-sm">
+                                        <p className="space-x-1">
+                                            <Link href={href} className="font-semibold text-sm">
+                                                {postUsername}
+                                            </Link>
+                                            <span className="font-medium text-neutral-500 dark:text-neutral-400 text-xs">
+                                                •
+                                            </span>
+                                            <Timestamp createdAt={post.createdAt} />
+                                        </p>
+                                        <p className="text-xs text-black dark:text-white font-normal">
+                                            Hanoi, Vietnam
+                                        </p>
+                                    </div>
                                 </div>
                             </HoverCardTrigger>
                             <HoverCardContent>

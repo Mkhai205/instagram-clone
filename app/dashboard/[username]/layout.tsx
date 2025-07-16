@@ -64,7 +64,7 @@ async function ProfileLayout({ children, params }: Props) {
                                         <Settings />
                                     </Button>
                                     <Link
-                                        href={`/dashboard/edit-profile`}
+                                        href={`/dashboard/edit_profile`}
                                         className={buttonVariants({
                                             className: "!font-bold",
                                             variant: "secondary",
@@ -102,18 +102,23 @@ async function ProfileLayout({ children, params }: Props) {
                                 <strong>{postsCount}</strong> {postsCount > 1 ? "posts" : "post"}
                             </p>
 
-                            <Link href={`dashboard/${profile.username}/followers`}>
+                            <Link href={`/dashboard/${profile.username}/followers`}>
                                 <strong>{followersCount}</strong>{" "}
                                 {followersCount > 1 ? "followers" : "follower"}
                             </Link>
-                            <Link href={`dashboard/${profile.username}/following`}>
+                            <Link href={`/dashboard/${profile.username}/following`}>
                                 <strong>{followingCount}</strong> following
                             </Link>
                         </div>
 
                         <div className="text-sm">
                             <div className="font-bold">{profile.name}</div>
-                            <p>{profile.bio}</p>
+                            <p
+                                className="max-w-96 whitespace-pre-wrap break-words 
+                                overflow-wrap-anywhere line-clamp-5 overflow-hidden"
+                            >
+                                {profile.bio}
+                            </p>
                         </div>
                     </div>
                 </div>

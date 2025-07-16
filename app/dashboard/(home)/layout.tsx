@@ -1,6 +1,10 @@
 import Header from "@/components/Header";
 
-function HomePageLayout({ children }: { children: React.ReactNode }) {
+function HomePageLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
     return (
         <div>
             <Header />

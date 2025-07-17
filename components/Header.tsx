@@ -1,6 +1,7 @@
 import { Heart, Search } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { InstagramIcon } from "./Icon";
 
 function Header() {
     return (
@@ -10,7 +11,7 @@ function Header() {
             px-3 py-2 sm:-ml-4"
         >
             <Link href="/dashboard">
-                <p className="font-semibold text-xl">Instagram</p>
+                <InstagramIcon className="!w-[103px] !h-[29px]" />
             </Link>
 
             <div className="flex items-center gap-x-3">
@@ -27,8 +28,9 @@ function Header() {
                     />
                 </div>
 
-                <Button size={"icon"} variant={"ghost"} className="hover:bg-transparent">
+                <Button size={"icon"} variant={"ghost"} className="relative hover:bg-transparent">
                     <Heart className="!w-6 !h-6" />
+                    <span className="absolute top-1.5 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 </Button>
             </div>
         </header>

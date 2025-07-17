@@ -53,7 +53,7 @@ function NavLink() {
         <>
             {links.map((link) => {
                 const LinkIcon = link.icon;
-                const isActive = link.href.startsWith(pathname);
+                const isActive = pathname === link.href;
 
                 return (
                     <Link

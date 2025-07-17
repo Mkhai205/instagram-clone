@@ -44,15 +44,30 @@ function LikeButton({ post, userId }: { post: PostWithExtras; userId?: string })
     };
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center gap-1">
             <form action={handleActionLike}>
                 <input type="hidden" name="postId" value={post.id} />
 
-                <ActionIcon>
-                    <Heart
-                        className={cn("!h-6 !w-6", { "text-red-500 fill-red-500": alreadyLiked })}
+                <div className="relative group transition-all duration-200 ease-in-out">
+                    <ActionIcon>
+                        <Heart
+                            className={cn("!h-6 !w-6 transition duration-200 ease-in-out", {
+                                "text-red-500 fill-red-500": alreadyLiked,
+                                "text-gray-600 dark:text-gray-400 group-hover:text-red-500 dark:group-hover:text-red-400":
+                                    !alreadyLiked,
+                            })}
+                        />
+                    </ActionIcon>
+
+                    {/* Subtle glow effect only on hover when not liked */}
+                    <div
+                        className={cn(
+                            "absolute inset-0 rounded-full pointer-events-none transition-opacity duration-300",
+                            "bg-red-400/10 opacity-0 group-hover:opacity-100",
+                            { hidden: !alreadyLiked }
+                        )}
                     />
-                </ActionIcon>
+                </div>
             </form>
             {optimisticLikes.length > 0 && (
                 <p className="text-sm font-semibold dark:text-white">

@@ -53,12 +53,22 @@ function BookmarkButton({ post, userId }: { post: PostWithExtras; userId?: strin
     return (
         <form action={handleActionBookmark}>
             <input type="hidden" name="postId" value={post.id} />
-            <ActionIcon>
+            <ActionIcon className="group relative overflow-hidden hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 hover:scale-105 active:scale-95">
                 <Bookmark
-                    className={cn("!h-6 !w-6", {
-                        "dark:fill-white fill-black": alreadyBookmarked,
-                    })}
+                    className={cn(
+                        "!h-6 !w-6 transition-all duration-500 ease-in-out transform",
+                        "group-hover:scale-110 group-active:scale-90",
+                        "hover:drop-shadow-lg",
+                        "relative z-10",
+                        {
+                            "dark:fill-white fill-black shadow-lg": alreadyBookmarked,
+                            "group-hover:fill-gray-600 dark:group-hover:fill-gray-300 stroke-2":
+                                !alreadyBookmarked,
+                        }
+                    )}
                 />
+                {/* Ripple effect background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full scale-0 group-active:scale-100 transition-transform duration-300" />
             </ActionIcon>
         </form>
     );

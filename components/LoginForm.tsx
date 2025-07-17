@@ -1,34 +1,31 @@
 "use client";
 
-// import { calSans } from "@/app/fonts";
 import { signIn } from "next-auth/react";
 import { useFormStatus } from "react-dom";
 import { Button } from "./ui/button";
+import { GoogleIcon } from "./Icon";
 
 export default function LoginForm() {
-    return (
-        <div className="space-y-3">
-            <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-                <h1 className={`mb-3 text-2xl dark:text-black`}>Please log in to continue.</h1>
-
-                <LoginButton />
-            </div>
-        </div>
-    );
-}
-
-function LoginButton() {
     const { pending } = useFormStatus();
 
     return (
         <Button
-            className="mt-4 w-full"
-            variant={"secondary"}
+            className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             aria-disabled={pending}
             disabled={pending}
             onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
         >
-            Log in with Google
+            {pending ? (
+                <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Signing in...
+                </div>
+            ) : (
+                <div className="flex items-center gap-3">
+                    <GoogleIcon className="w-5 h-5" />
+                    Continue with Google
+                </div>
+            )}
         </Button>
     );
 }

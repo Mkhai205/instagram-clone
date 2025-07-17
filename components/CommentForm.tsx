@@ -59,6 +59,7 @@ function CommentForm({ postId, className, inputRef }: PostViewProps) {
                                         className="bg-transparent text-sm border-none focus:outline-none
                                         flex-1 dark:text-neutral-400 placeholder-neu400 font-medium disabled:opacity-30"
                                         {...field}
+                                        ref={inputRef || field.ref}
                                     />
                                 </FormControl>
                             </FormItem>

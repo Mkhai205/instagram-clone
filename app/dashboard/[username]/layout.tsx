@@ -18,7 +18,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): // parent: ResolvingMetadata
 Promise<Metadata> {
-    const username = params.username;
+    const username = decodeURIComponent(params.username);
     const profile = await fetchProfileByUsername(username);
 
     return {
@@ -27,7 +27,8 @@ Promise<Metadata> {
 }
 
 async function ProfileLayout({ children, params }: Props) {
-    const profile = await fetchProfileByUsername(params.username);
+    const username = decodeURIComponent(params.username);
+    const profile = await fetchProfileByUsername(username);
 
     const session = await auth();
     const isCurrentUser = session?.user?.id === profile?.id;

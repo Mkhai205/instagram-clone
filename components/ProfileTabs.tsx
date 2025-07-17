@@ -42,7 +42,7 @@ const profileTabs = [
 ];
 
 function ProfileTabs({ profile, isCurrentUser }: Props) {
-    const pathname = usePathname();
+    const pathname = decodeURIComponent(usePathname());
     const profilePage = `/dashboard/${profile.username}`;
 
     return (

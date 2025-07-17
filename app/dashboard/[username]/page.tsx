@@ -6,7 +6,8 @@ type Props = {
 };
 
 async function ProfilePage({ params }: Props) {
-    const posts = await fetchPostByUsername(params.username);
+    const username = decodeURIComponent(params.username);
+    const posts = await fetchPostByUsername(username);
     return <PostsGrid posts={posts} />;
 }
 export default ProfilePage;

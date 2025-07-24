@@ -1,7 +1,7 @@
-import { InstagramIcon } from "@/components/Icon";
+import { InstagramIcon } from "@/components/common";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
-import LoginForm from "@/components/LoginForm";
+import { LoginForm } from "@/components/auth";
 
 function RegisterPage() {
     return (

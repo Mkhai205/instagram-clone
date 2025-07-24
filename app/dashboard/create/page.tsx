@@ -1,6 +1,6 @@
 "use client";
 
-import Error from "@/components/Error";
+import { Error } from "@/components/common";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";

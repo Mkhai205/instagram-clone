@@ -1,4 +1,4 @@
-import PostsGrid from "@/components/PostsGrid";
+import { PostsGrid } from "@/components/posts";
 import { fetchPostByUsername } from "@/lib/data";
 
 type Props = {

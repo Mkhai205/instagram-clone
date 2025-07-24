@@ -1,12 +1,12 @@
 import "./globals.css";
 import { geistSans, geistMono } from "@/app/fonts";
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/providers";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { Toaster } from "sonner";
-import AuthProvider from "@/components/AuthProvider";
+import { AuthProvider } from "@/components/providers";
 
 export const metadata: Metadata = {
     title: "Instagram",

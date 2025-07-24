@@ -1,5 +1,5 @@
-import { InstagramIcon } from "@/components/Icon";
-import LoginForm from "@/components/LoginForm";
+import { InstagramIcon } from "@/components/common";
+import { LoginForm } from "@/components/auth";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 

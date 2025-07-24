@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
-import Posts from "@/components/Posts";
-import { PostsSkeleton } from "@/components/Skeleton";
+import { Posts } from "@/components/posts";
+import { PostsSkeleton } from "@/components/common";
 
 function DashboardPage() {
     return (

@@ -1,10 +1,10 @@
 import { auth } from "@/auth";
-import FollowButton from "@/components/FollowButton";
-import ProfileAvatar from "@/components/ProfileAvatar";
-import ProfileHeader from "@/components/ProfileHeader";
-import ProfileTabs from "@/components/ProfileTabs";
+import { FollowButton } from "@/components/follow";
+import { ProfileAvatar } from "@/components/profile";
+import { ProfileHeader } from "@/components/profile";
+import { ProfileTabs } from "@/components/profile";
 import { Button, buttonVariants } from "@/components/ui/button";
-import UserAvatar from "@/components/UserAvatar";
+import { UserAvatar } from "@/components/profile";
 import { fetchProfileByUsername } from "@/lib/data";
 import { MoreHorizontal, Settings } from "lucide-react";
 import { Metadata } from "next";
@@ -65,7 +65,7 @@ async function ProfileLayout({ children, params }: Props) {
                                         <Settings />
                                     </Button>
                                     <Link
-                                        href={`/dashboard/edit_profile`}
+                                        href={`/dashboard/edit-profile`}
                                         className={buttonVariants({
                                             className: "!font-bold",
                                             variant: "secondary",

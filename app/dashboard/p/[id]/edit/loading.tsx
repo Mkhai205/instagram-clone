@@ -1,4 +1,4 @@
-import { EditPostSkeleton } from "@/components/Skeleton";
+import { EditPostSkeleton } from "@/components/common";
 
 function loading() {
     return <EditPostSkeleton />;

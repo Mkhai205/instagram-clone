@@ -1,6 +1,6 @@
-import MorePosts from "@/components/MorePosts";
-import SinglePost from "@/components/SinglePost";
-import { SinglePostSkeleton } from "@/components/Skeleton";
+import { MorePosts } from "@/components/posts";
+import { SinglePost } from "@/components/posts";
+import { SinglePostSkeleton } from "@/components/common";
 import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";
 

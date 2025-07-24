@@ -1,4 +1,4 @@
-import SideNav from "@/components/SideNav";
+import { SideNav } from "@/components/navigation";
 
 export default function DashboardLayout({
     children,

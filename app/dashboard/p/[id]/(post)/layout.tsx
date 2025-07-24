@@ -1,4 +1,4 @@
-import PostBack from "@/components/PostBack";
+import { PostBack } from "@/components/posts";
 
 export default function DashboardLayout({
     children,

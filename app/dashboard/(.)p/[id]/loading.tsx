@@ -1,4 +1,4 @@
-import { ViewPostSkeleton } from "@/components/Skeleton";
+import { ViewPostSkeleton } from "@/components/common";
 
 function loading() {
     return <ViewPostSkeleton />;

@@ -1,4 +1,4 @@
-import EditPost from "@/components/EditPost";
+import { EditPost } from "@/components/posts";
 import { fetchPostById } from "@/lib/data";
 import { notFound } from "next/navigation";
 

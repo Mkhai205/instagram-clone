@@ -1,4 +1,4 @@
-import PostView from "@/components/PostView";
+import { PostView } from "@/components/posts";
 import { fetchPostById } from "@/lib/data";
 import { notFound } from "next/navigation";
 

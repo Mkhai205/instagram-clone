@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import PostsGrid from "@/components/PostsGrid";
+import { PostsGrid } from "@/components/posts";
 import { fetchSavedPostsByUsername } from "@/lib/data";
 import { redirect } from "next/navigation";
 

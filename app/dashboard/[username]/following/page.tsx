@@ -1,4 +1,4 @@
-import FollowingModal from "@/components/FollowingModal";
+import { FollowingModal } from "@/components/follow";
 import { fetchProfileByUsername } from "@/lib/data";
 
 async function FollowingPage({ params: { username } }: { params: { username: string } }) {
